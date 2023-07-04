@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply text-primary-400;
+    @apply text-base;
+  }
+  p {
+    @apply text-secondary-500;
+  }
+}
