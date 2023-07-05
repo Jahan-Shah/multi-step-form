@@ -6,8 +6,21 @@
   body {
     @apply text-primary-400;
     @apply text-base;
+    @apply font-ubuntu;
   }
   p {
     @apply text-secondary-500;
+  }
+}
+
+@layer components {
+  .base__card {
+    @apply mx-4 rounded-lg bg-secondary-100 px-6 py-7 drop-shadow-lg;
+  }
+  .input__flex {
+    @apply flex flex-col gap-2.5;
+  }
+  .label {
+    @apply cursor-pointer border bg-transparent px-3.5 py-1.5 ring-primary-300;
   }
 }
