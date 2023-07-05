@@ -6,6 +6,7 @@ export const useStore = defineStore("store", () => {
   const email = ref("");
   const phoneNumber = ref();
   const plan = ref("");
+  const planPrice = ref()
   const duration = ref("monthly");
 
   return {
@@ -13,6 +14,7 @@ export const useStore = defineStore("store", () => {
     email,
     phoneNumber,
     plan,
+    planPrice,
     duration,
   }
 })
