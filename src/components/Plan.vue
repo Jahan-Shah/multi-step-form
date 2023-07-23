@@ -23,7 +23,7 @@ const store = useStore();
 </script>
 
 <template>
-  <div class="base__card flex flex-col gap-5">
+  <div class="max-sm:base__card flex flex-col gap-5">
     <div class="flex flex-col gap-1.5">
       <h2 class="text-2xl font-bold">Select your plan</h2>
       <p>You have the option of monthly or yearly billing.</p>

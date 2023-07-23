@@ -4,16 +4,32 @@ import TheHeader from "./components/TheHeader.vue";
 </script>
 
 <template>
-  <section class="h-screen bg-secondary-300">
-    <img src="./assets/images/bg-sidebar-mobile.svg" alt="" />
-    <section class="absolute inset-x-0 top-24">
-      <TheHeader />
-      <RouterView v-slot="slotsProps">
-        <Transition name="route" mode="out-in">
-          <component :is="slotsProps.Component" />
-        </Transition>
-      </RouterView>
-    </section>
+  <section>
+    <div class="sm:base__card flex">
+      <div class="sm:max=w-full relative max-sm:w-full">
+        <picture>
+          <source
+            srcset="./assets/images/bg-sidebar-desktop.svg"
+            media="(min-width: 640px)"
+          />
+          <img
+            class="sm:max=w-full max-sm:w-full"
+            src="./assets/images/bg-sidebar-mobile.svg"
+            alt=""
+          />
+        </picture>
+        <TheHeader class="absolute inset-x-0 top-[38px] sm:left-8" />
+      </div>
+      <!-- <section class="absolute inset-x-0 top-7 sm:relative"> -->
+      <form class="top-24 mx-auto px-8 max-sm:absolute" @submit.prevent="">
+        <RouterView v-slot="{ Component }">
+          <Transition name="route" mode="out-in">
+            <component :is="Component" />
+          </Transition>
+        </RouterView>
+      </form>
+      <!-- </section> -->
+    </div>
   </section>
 </template>
 

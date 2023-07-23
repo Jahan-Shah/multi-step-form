@@ -6,7 +6,7 @@ const store = useStore();
 </script>
 
 <template>
-  <div class="base__card flex flex-col gap-5">
+  <div class="max-sm:base__card flex flex-col gap-5">
     <div class="flex flex-col gap-1.5">
       <h2 class="text-2xl font-bold">Personal info</h2>
       <p>Please provide your name, email address, and phone number.</p>

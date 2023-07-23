@@ -34,9 +34,10 @@ const requiredField = computed(() => {
       class="label mt-0.5 rounded font-medium placeholder:font-normal hover:ring-2 focus:outline-none focus:ring-2 active:ring-2 md:mt-3"
       :id="label"
       :type="type"
+      :name="label"
+      :required="required"
       :placeholder="placeHolder"
       v-model="modelValue"
-      :required="required"
     />
   </div>
 </template>
