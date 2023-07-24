@@ -7,8 +7,6 @@ function planPrice(val) {
   store.planPrice = val;
 }
 
-const checkbox = ref(false);
-
 const price = function () {
   if (store.duration === "monthly") {
     store.duration = "yearly";
