@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue";
 import { useStore } from "../store";
 import BaseRadio from "./BaseRadio.vue";
 
@@ -7,7 +6,8 @@ function planPrice(val) {
   store.planPrice = val;
 }
 
-const price = function () {
+const setDuration = function () {
+  store.addOns = [];
   if (store.duration === "monthly") {
     store.duration = "yearly";
     store.planPrice *= 10;
@@ -63,7 +63,7 @@ const store = useStore();
         <input
           :checked="store.duration === 'yearly'"
           type="checkbox"
-          @click="price"
+          @click="setDuration"
           name="yearly"
           class="peer sr-only"
         />
