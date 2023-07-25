@@ -1,27 +1,59 @@
 <script setup lang="ts">
+import { computed, reactive } from "vue";
+
+const modelValue = defineModel();
 const title = defineModel<string>("title");
 const description = defineModel<string>("description");
-const price = defineModel<number>("price");
+const price = defineModel<number>("price", { default: 0 });
+const duration = defineModel<string>("duration");
+
+const emits = defineEmits(["sendPrice"]);
+
+const repTitle = computed(() => {
+  return title.value?.replace(/\s+/g, "").toLowerCase();
+});
+
+const calcPrice = computed(() => {
+  if (duration.value === "yearly") {
+    return price.value * 10;
+  }
+  if (duration.value === "monthly") {
+    return price.value;
+  }
+});
+
+const addOn = reactive({
+  value: repTitle,
+  price: calcPrice,
+});
+
+const updatePrice = function () {
+  emits("sendPrice", calcPrice.value);
+};
 </script>
 
 <template>
   <label
-    :for="title"
-    class="label ml-2 flex items-center rounded border border-secondary-400 py-4"
+    :for="repTitle"
+    class="label flex items-center rounded-lg border border-secondary-400 py-4 hover:border-primary-300 focus:border-primary-300 active:border-primary-300"
   >
     <input
-      :id="title"
       type="checkbox"
-      :value="title?.replace(/\s+/g, '')"
-      :name="title?.replace(/\s+/g, '')"
+      :id="repTitle"
+      :value="addOn"
+      :name="repTitle"
+      @click="updatePrice"
+      v-model="modelValue"
       class="label relative h-5 w-5 appearance-none rounded p-0 text-lg text-secondary-100 checked:border-primary-300 checked:bg-primary-300 before:checked:absolute before:checked:left-1/2 before:checked:top-1/2 before:checked:-translate-x-1/2 before:checked:-translate-y-1/2 before:checked:text-secondary-100 before:checked:content-['\2713'] focus:ring-2"
     />
-    <div class="ml-4">
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
-    </div>
-    <div>
-      <p class="price">+${{ price }}/yr</p>
+    <div class="flex w-full justify-between">
+      <div class="ml-4">
+        <h3 class="text-md font-bold">{{ title }}</h3>
+        <p class="text-sm">{{ description }}</p>
+      </div>
+      <p class="text-sm text-primary-300">
+        +${{ calcPrice }}/{{ duration === "monthly" ? "mo" : "yr" }}
+      </p>
     </div>
   </label>
 </template>
