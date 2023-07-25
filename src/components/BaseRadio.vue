@@ -32,8 +32,8 @@ const updatePrice = function () {
     :value="label?.toLowerCase()"
     v-model="modelValue"
     class="peer hidden"
-    required
     @click="updatePrice"
+    required
   />
   <label
     :for="label?.toLowerCase()"
@@ -42,14 +42,15 @@ const updatePrice = function () {
     <img :src="src" alt="" />
     <div class="block">
       <h3 class="text-md font-semibold">{{ label }}</h3>
-      <p v-if="duration === 'yearly'" class="text-sm">${{ price * 10 }}/yr</p>
+      <p class="text-sm">
+        ${{ calcPrice }}/{{ duration === "monthly" ? "mo" : "yr" }}
+      </p>
       <p
         v-if="duration === 'yearly'"
         class="text-sm font-medium text-primary-400"
       >
         2 months free
       </p>
-      <p v-else class="text-sm">${{ price }}/mo</p>
     </div>
   </label>
 </template>
