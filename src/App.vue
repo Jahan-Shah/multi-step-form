@@ -20,15 +20,13 @@ import TheHeader from "./components/TheHeader.vue";
         </picture>
         <TheHeader class="absolute inset-x-0 top-[38px] sm:left-8" />
       </div>
-      <!-- <section class="absolute inset-x-0 top-7 sm:relative"> -->
-      <form class="top-24 mx-auto px-8 max-sm:absolute" @submit.prevent="">
+      <form class="inset-x-0 top-24 max-sm:absolute sm:px-8" @submit.prevent="">
         <RouterView v-slot="{ Component }">
           <Transition name="route" mode="out-in">
             <component :is="Component" />
           </Transition>
         </RouterView>
       </form>
-      <!-- </section> -->
     </div>
   </section>
 </template>
