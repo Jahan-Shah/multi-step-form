@@ -1,6 +1,17 @@
 <script setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRouter, useRoute } from "vue-router";
 import TheHeader from "./components/TheHeader.vue";
+
+const route = useRoute();
+const router = useRouter();
+
+const prev = () => {
+  router.push({ path: route.meta.prev });
+};
+
+const next = () => {
+  router.push({ path: route.meta.next });
+};
 </script>
 
 <template>
@@ -20,12 +31,39 @@ import TheHeader from "./components/TheHeader.vue";
         </picture>
         <TheHeader class="absolute inset-x-0 top-[38px] sm:left-8" />
       </div>
-      <form class="inset-x-0 top-24 max-sm:absolute sm:px-8" @submit.prevent="">
+      <form
+        class="flex flex-col justify-between sm:px-12 md:px-[100px]"
+        @submit.prevent=""
+      >
         <RouterView v-slot="{ Component }">
           <Transition name="route" mode="out-in">
-            <component :is="Component" />
+            <component
+              class="inset-x-0 top-24 max-sm:absolute"
+              :is="Component"
+            />
           </Transition>
         </RouterView>
+        <div
+          class="inset-x-0 bottom-0 flex justify-between bg-secondary-100 p-4 max-sm:absolute"
+        >
+          <button @click="prev" class="font-medium text-secondary-500">
+            Go Back
+          </button>
+          <button
+            v-if="route.path === '/finishing-up'"
+            type="submit"
+            class="rounded-md bg-primary-400 px-4 py-2 text-secondary-100"
+          >
+            Submit
+          </button>
+          <button
+            v-else
+            @click="next"
+            class="rounded-md bg-primary-400 px-4 py-2 text-secondary-100"
+          >
+            Next Step
+          </button>
+        </div>
       </form>
     </div>
   </section>
