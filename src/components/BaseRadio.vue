@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const modelValue = defineModel<string>();
+const modelValue = defineModel();
 const label = defineModel<string>("label");
 const price = defineModel<number>("price", { default: 0 });
 const duration = defineModel<string>("duration");
@@ -11,10 +11,10 @@ const src = `/icon-${label.value?.toLowerCase()}.svg`;
 const emits = defineEmits(["sendPrice"]);
 
 const calcPrice = computed(() => {
-  if (duration.value === "yearly") {
+  if (duration.value === "Yearly") {
     return price.value * 10;
   }
-  if (duration.value === "monthly") {
+  if (duration.value === "Monthly") {
     return price.value;
   }
 });
@@ -29,7 +29,7 @@ const updatePrice = function () {
     type="radio"
     :id="label?.toLowerCase()"
     name="plan"
-    :value="label?.toLowerCase()"
+    :value="label"
     v-model="modelValue"
     class="peer hidden"
     @click="updatePrice"
@@ -43,10 +43,10 @@ const updatePrice = function () {
     <div class="block">
       <h3 class="text-md font-semibold">{{ label }}</h3>
       <p class="text-sm">
-        ${{ calcPrice }}/{{ duration === "monthly" ? "mo" : "yr" }}
+        ${{ calcPrice }}/{{ duration === "Monthly" ? "mo" : "yr" }}
       </p>
       <p
-        v-if="duration === 'yearly'"
+        v-if="duration === 'Yearly'"
         class="text-sm font-medium text-primary-400"
       >
         2 months free
