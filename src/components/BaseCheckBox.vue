@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive } from "vue";
+import { computed } from "vue";
 
 const modelValue = defineModel();
 const title = defineModel<string>("title");
@@ -7,29 +7,18 @@ const description = defineModel<string>("description");
 const price = defineModel<number>("price", { default: 0 });
 const duration = defineModel<string>("duration");
 
-const emits = defineEmits(["sendPrice"]);
-
 const repTitle = computed(() => {
   return title.value?.replace(/\s+/g, "").toLowerCase();
 });
 
 const calcPrice = computed(() => {
-  if (duration.value === "yearly") {
+  if (duration.value === "Yearly") {
     return price.value * 10;
   }
-  if (duration.value === "monthly") {
+  if (duration.value === "Monthly") {
     return price.value;
   }
 });
-
-const addOn = reactive({
-  value: repTitle,
-  price: calcPrice,
-});
-
-const updatePrice = function () {
-  emits("sendPrice", calcPrice.value);
-};
 </script>
 
 <template>
@@ -40,9 +29,8 @@ const updatePrice = function () {
     <input
       type="checkbox"
       :id="repTitle"
-      :value="addOn"
+      :value="{ title, price: calcPrice }"
       :name="repTitle"
-      @click="updatePrice"
       v-model="modelValue"
       class="label relative h-5 w-5 appearance-none rounded p-0 text-lg text-secondary-100 checked:border-primary-300 checked:bg-primary-300 before:checked:absolute before:checked:left-1/2 before:checked:top-1/2 before:checked:-translate-x-1/2 before:checked:-translate-y-1/2 before:checked:text-secondary-100 before:checked:content-['\2713'] focus:ring-2"
     />
@@ -52,7 +40,7 @@ const updatePrice = function () {
         <p class="text-sm">{{ description }}</p>
       </div>
       <p class="text-sm text-primary-300">
-        +${{ calcPrice }}/{{ duration === "monthly" ? "mo" : "yr" }}
+        +${{ calcPrice }}/{{ duration === "Monthly" ? "mo" : "yr" }}
       </p>
     </div>
   </label>
