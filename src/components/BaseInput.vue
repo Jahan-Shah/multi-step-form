@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-const modelValue = defineModel<string>();
+const modelValue = defineModel();
 const label = defineModel<string>("label");
 const type = defineModel<string>("type");
 const placeHolder = defineModel<string>("placeHolder");
@@ -9,7 +9,6 @@ const required = defineModel<boolean>("required", {
   default: true,
 });
 const isValid = defineModel<boolean>("isValid", {
-  // required: true,
   default: true,
 });
 
