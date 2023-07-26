@@ -2,20 +2,15 @@
 import { useStore } from "../store";
 import BaseRadio from "./BaseRadio.vue";
 
+const plans = [
+  { label: "Arcade", price: 9 },
+  { label: "Advance", price: 12 },
+  { label: "Pro", price: 15 },
+];
+
 function planPrice(val) {
   store.planPrice = val;
 }
-
-const setDuration = function () {
-  store.addOns = [];
-  if (store.duration === "monthly") {
-    store.duration = "yearly";
-    store.planPrice *= 10;
-  } else if (store.duration === "yearly") {
-    store.duration = "monthly";
-    store.planPrice /= 10;
-  }
-};
 
 const store = useStore();
 </script>
@@ -27,31 +22,13 @@ const store = useStore();
       <p>You have the option of monthly or yearly billing.</p>
     </div>
     <ul class="form__inputs flex flex-col gap-2.5">
-      <li>
+      <li v-for="plan in plans">
         <BaseRadio
           @sendPrice="planPrice"
           :duration="store.duration"
           v-model="store.plan"
-          label="Arcade"
-          :price="9"
-        />
-      </li>
-      <li>
-        <BaseRadio
-          @sendPrice="planPrice"
-          :duration="store.duration"
-          v-model="store.plan"
-          label="Advance"
-          :price="12"
-        />
-      </li>
-      <li>
-        <BaseRadio
-          @sendPrice="planPrice"
-          :duration="store.duration"
-          v-model="store.plan"
-          label="Pro"
-          :price="15"
+          :label="plan.label"
+          :price="plan.price"
         />
       </li>
     </ul>
@@ -61,10 +38,10 @@ const store = useStore();
       <span class="text-sm font-bold">Monthly</span>
       <label class="relative inline-flex cursor-pointer items-center">
         <input
-          :checked="store.duration === 'yearly'"
+          :checked="store.duration === 'Yearly'"
           type="checkbox"
-          @click="setDuration"
-          name="yearly"
+          @click="store.setDuration()"
+          name="Yearly"
           class="peer sr-only"
         />
         <div
