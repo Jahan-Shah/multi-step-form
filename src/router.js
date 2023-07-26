@@ -7,10 +7,38 @@ const FinishingUp = () => import('./components/FinishingUp.vue')
 
 const routes = [
   { path: '/', redirect: '/personal-info' },
-  { path: '/personal-info', component: PersonalInfo },
-  { path: '/plan', component: Plan },
-  { path: '/add-ons', component: AddOns },
-  { path: '/finishing-up', component: FinishingUp },
+  {
+    path: '/personal-info',
+    component: PersonalInfo,
+    meta: {
+      prev: '',
+      next: '/plan'
+    }
+  },
+  {
+    path: '/plan',
+    component: Plan,
+    meta: {
+      prev: '/personal-info',
+      next: '/add-ons'
+    }
+  },
+  {
+    path: '/add-ons',
+    component: AddOns,
+    meta: {
+      prev: '/plan',
+      next: '/finishing-up'
+    }
+  },
+  {
+    path: '/finishing-up',
+    component: FinishingUp,
+    meta: {
+      prev: '/add-ons',
+      next: ''
+    }
+  },
 ]
 
 const router = createRouter({
