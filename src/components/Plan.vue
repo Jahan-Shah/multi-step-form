@@ -21,17 +21,15 @@ const store = useStore();
       <h2 class="text-2xl font-bold">Select your plan</h2>
       <p>You have the option of monthly or yearly billing.</p>
     </div>
-    <ul class="form__inputs flex flex-col gap-2.5">
-      <li v-for="plan in plans">
-        <BaseRadio
-          @sendPrice="planPrice"
-          :duration="store.duration"
-          v-model="store.plan"
-          :label="plan.label"
-          :price="plan.price"
-        />
-      </li>
-    </ul>
+    <div class="form__inputs flex flex-col gap-2.5" v-for="plan in plans">
+      <BaseRadio
+        @sendPrice="planPrice"
+        :duration="store.duration"
+        v-model="store.plan"
+        :label="plan.label"
+        :price="plan.price"
+      />
+    </div>
     <div
       class="mt-1.5 inline-flex items-center justify-center gap-6 rounded-lg bg-secondary-200 py-3.5"
     >
