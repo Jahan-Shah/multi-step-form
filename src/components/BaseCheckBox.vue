@@ -24,7 +24,7 @@ const calcPrice = computed(() => {
 <template>
   <label
     :for="repTitle"
-    class="label flex items-center rounded-lg border border-secondary-400 py-4 hover:border-primary-300 focus:border-primary-300 active:border-primary-300"
+    class="label flex items-center rounded-lg border border-secondary-400 py-4 ring-primary-300 hover:ring-2 focus:ring-2 [&:has(input:checked)]:ring-2"
   >
     <input
       type="checkbox"
