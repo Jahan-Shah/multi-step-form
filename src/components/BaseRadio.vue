@@ -28,7 +28,6 @@ const updatePrice = function () {
   <input
     type="radio"
     :id="label?.toLowerCase()"
-    name="plan"
     :value="label"
     v-model="modelValue"
     class="peer hidden"
