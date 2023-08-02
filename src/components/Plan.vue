@@ -1,6 +1,10 @@
 <script setup>
+import { ref } from "vue";
+import { onBeforeRouteLeave } from "vue-router";
 import { useStore } from "../store";
 import BaseRadio from "./BaseRadio.vue";
+
+const plan = ref(false);
 
 const plans = [
   { label: "Arcade", price: 9 },
@@ -13,6 +17,12 @@ function planPrice(val) {
 }
 
 const store = useStore();
+
+onBeforeRouteLeave((to, from, next) => {
+  plan.value = false;
+  if (!store.isPlanSelected) plan.value = true;
+  if (to.fullPath === from.meta.prev || store.isPlanSelected) next(true);
+});
 </script>
 
 <template>
@@ -21,6 +31,9 @@ const store = useStore();
       <h2 class="text-2xl font-bold">Select your plan</h2>
       <p>You have the option of monthly or yearly billing.</p>
     </div>
+    <span v-if="plan" class="text-right text-xs font-bold text-error">
+      Please select a plan
+    </span>
     <div class="form__inputs flex flex-col gap-2.5" v-for="plan in plans">
       <BaseRadio
         @sendPrice="planPrice"

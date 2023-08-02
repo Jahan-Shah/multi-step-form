@@ -1,8 +1,30 @@
 <script setup>
+import { ref } from "vue";
+import { onBeforeRouteLeave, useRoute } from "vue-router";
+
+const route = useRoute();
+
 import { useStore } from "../store";
 import BaseInput from "./BaseInput.vue";
-
 const store = useStore();
+
+const name = ref(false);
+const email = ref(false);
+const phoneNum = ref(false);
+
+onBeforeRouteLeave((_to, _from, next) => {
+  name.value = false;
+  email.value = false;
+  phoneNum.value = false;
+  if (!store.isEmailValid && !store.isNameEmpty && !store.isPhoneNumberValid)
+    next();
+
+  if (store.isEmailValid) email.value = true;
+
+  if (store.isNameEmpty) name.value = true;
+
+  if (store.isPhoneNumberValid) phoneNum.value = true;
+});
 </script>
 
 <template>
@@ -16,18 +38,21 @@ const store = useStore();
         v-model="store.name"
         label="Name"
         type="text"
+        :isValid="name"
         placeHolder="e.g. Stephan King"
       />
       <BaseInput
         v-model="store.email"
         label="Email Address"
         type="email"
+        :isValid="email"
         placeHolder="e.g. stephanking@lorem.com"
       />
       <BaseInput
         v-model="store.phoneNumber"
         label="Phone Number"
         type="number"
+        :isValid="phoneNum"
         placeHolder="e.g. +1 234 567 890"
       />
     </div>
