@@ -34,6 +34,12 @@ const requiredField = computed(() => {
     >
       This field is required
     </span>
+    <span
+      v-else-if="isValid"
+      class="absolute right-0 top-0 text-xs font-bold text-error"
+    >
+      Enter valid {{ label }}
+    </span>
     <input
       @blur="blur"
       @focus="modalInput = true"
