@@ -4,6 +4,8 @@ const PersonalInfo = () => import('./components/PersonalInfo.vue')
 const Plan = () => import('./components/Plan.vue')
 const AddOns = () => import('./components/AddOns.vue')
 const FinishingUp = () => import('./components/FinishingUp.vue')
+const ThankYou = () => import("./components/ThankYou.vue");
+
 
 const routes = [
   { path: '/', redirect: '/personal-info' },
@@ -39,6 +41,10 @@ const routes = [
       next: ''
     }
   },
+  {
+    path: '/thank-you',
+    component: ThankYou,
+  }
 ]
 
 const router = createRouter({
