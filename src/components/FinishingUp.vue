@@ -42,7 +42,7 @@ const store = useStore();
         </div>
       </div>
     </div>
-    <div v-if="store.planPrice !== undefined" class="flex justify-between p-4">
+    <div v-if="store.planPrice !== 0" class="flex justify-between p-4">
       <p>Total (per {{ store.duration === "Monthly" ? "month" : "year" }})</p>
       <p class="text-lg font-bold text-primary-300">
         ${{ store.planPrice + store.addOnPrice }}/{{
@@ -50,5 +50,11 @@ const store = useStore();
         }}
       </p>
     </div>
+    <span
+      v-if="!store.isFormValid"
+      class="text-right text-xs font-bold text-error"
+    >
+      Please fill all the fields in the form
+    </span>
   </div>
 </template>
