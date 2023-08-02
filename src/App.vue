@@ -17,6 +17,7 @@ const next = () => {
 </script>
 
 <template>
+  <h1 class="sr-only">Multi-Step Form</h1>
   <section>
     <div class="sm:base__card flex">
       <div class="sm:max=w-full relative max-sm:w-full">
